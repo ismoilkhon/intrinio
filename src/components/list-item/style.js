@@ -2,6 +2,8 @@ import Color from 'color'
 import { StyleSheet } from 'react-native'
 import { theme } from '../../utilities/theme'
 
+export const colors = ['#F55D42', '#2ADAF5', '#F5AE11', '#1DF59A', '#427EF5', '#1D6BF5']
+
 export const styles = StyleSheet.create({
 	cont: {
 		width: '100%',

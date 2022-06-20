@@ -21,6 +21,9 @@ export const styles = StyleSheet.create({
 		letterSpacing: 1.2,
 		textTransform: 'uppercase',
 	},
+	p: {
+		fontSize: 18,
+	},
 	label: {
 		fontSize: 14,
 		fontWeight: '200',

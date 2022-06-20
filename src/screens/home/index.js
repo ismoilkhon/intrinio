@@ -6,13 +6,17 @@ import React, { useEffect, useState } from 'react'
 import { ListItem } from '../../components/list-item'
 import { Container } from '../../components/container'
 
-export function Home() {
+export function Home({ navigation }) {
 	const [query, setQuery] = useState('')
 	const [loading, setLoading] = useState(false)
-	const { companies, loadCompanies } = useStore()
+	const { companies, loadCompanies, loadCompany } = useStore()
 
 	useEffect(() => {
 		loadCompanies(query)
+	}, [])
+
+	useEffect(() => {
+		loadCompany()
 	}, [])
 
 	async function search() {
@@ -21,6 +25,11 @@ export function Home() {
 			await loadCompanies(query)
 			setLoading(false)
 		}
+	}
+
+	async function navigateToInfo(item) {
+		await loadCompany(item?.ticker)
+		navigation.navigate('Info')
 	}
 
 	return (
@@ -42,7 +51,13 @@ export function Home() {
 				keyExtractor={item => item.id}
 				onEndReached={() => loadCompanies(query)}
 				data={query ? companies[query] : companies.all}
-				renderItem={({ item }) => <ListItem {...item}/>}
+				renderItem={
+					({ item, index }) => <ListItem
+						{...item}
+						index={index}
+						onPress={() => navigateToInfo(item)}
+					/>
+				}
 			/>
 		</Container>
 	)
